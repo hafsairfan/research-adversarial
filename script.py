@@ -257,16 +257,15 @@ def rand_bbox(size, lam):
 
 epoch_num = []
 
-if train_losses is None:
-  train_losses = []
-  test_losses =[]
-  test_ad_losses = []
+train_losses = []
+test_losses =[]
+test_ad_losses = []
 
-  train_accuracies = []
-  test_accuracies = []
-  test_ad_accuracies = []
+train_accuracies = []
+test_accuracies = []
+test_ad_accuracies = []
 
-for epoch in range(start_epoch, epochs):
+for epoch in range(epochs):
   
   epoch_num.append(epoch)
   epoch_loss = 0
@@ -311,6 +310,9 @@ for epoch in range(start_epoch, epochs):
     loss.backward()
 
     optimizer.step()
+
+    label = label.type(torch.LongTensor)
+    label = label.to(device)
 
     acc = (output.argmax(dim=1) == label).float().mean()
     epoch_accuracy += acc / len(train_loader)
