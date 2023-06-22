@@ -1,1 +1,1 @@
-# research-adversarial
+# adversarial
